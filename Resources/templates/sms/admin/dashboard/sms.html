@@ -1,0 +1,7 @@
+<div class="b-dashboard__widget">
+    <h3 class="b-dashboard__widget__title">sms.ru</h3>
+    <div class="b-dashboard__widget__content">
+        <p>Ваш баланс: {{ balance.balance|number_format(2, '.', ' ') }} руб.</p>
+        <p>Лимиты: {{ limit.current }} из {{ limit.limit }} смс</p>
+    </div>
+</div>

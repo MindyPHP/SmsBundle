@@ -1,0 +1,18 @@
+services:
+    sms_api_token:
+        class: Zelenin\SmsRu\Auth\ApiIdAuth
+        arguments: [ '%sms_api_token%' ]
+        public: false
+
+    sms:
+        class: Zelenin\SmsRu\Api
+        arguments: [ '@sms_api_token' ]
+
+    sms_spool:
+        class: Mindy\Bundle\SmsBundle\Pool\SmsSpool
+
+    dashboard.widget.sms:
+        class: Mindy\Bundle\SmsBundle\Dashboard\SmsWidget
+        arguments: [ '@sms' ]
+        tags:
+            - { name: admin.dashboard.widget }
