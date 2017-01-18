@@ -1,5 +1,6 @@
 {
   "name": "mindy/sms-bundle",
+  "license": "MIT",
   "require": {
     "zelenin/smsru": "~4"
   },
