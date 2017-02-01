@@ -22,7 +22,7 @@ class Sms extends Model
         return [
             'to' => [
                 'class' => CharField::class,
-                'length' => 10
+                'length' => 11
             ],
             'text' => [
                 'class' => TextField::class
