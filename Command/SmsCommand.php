@@ -42,10 +42,11 @@ class SmsCommand extends ContainerAwareCommand
             $logMessage = sprintf("Send '%s' to '%s'", $sms->text, $sms->to);
 
             /* @var \Mindy\Bundle\SmsBundle\Model\Sms $sms */
-            $message = new Sms($this->to, $this->text);
+            $message = new Sms($sms->to, $sms->text);
             $message->test = $debug;
             $message->translit = false;
             $message->partner_id = $container->getParameter('sms_partner_id');
+
             $smsApi->smsSend($message);
 
             $logger->info($logMessage);

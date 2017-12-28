@@ -17,6 +17,13 @@ use Mindy\Orm\Fields\DateTimeField;
 use Mindy\Orm\Fields\TextField;
 use Mindy\Orm\Model;
 
+/**
+ * Class Sms
+ *
+ * @property string $created_at
+ * @property string $text
+ * @property string $to
+ */
 class Sms extends Model
 {
     public static function getFields()
@@ -35,5 +42,10 @@ class Sms extends Model
                 'editable' => false,
             ],
         ];
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s - %s', $this->to, $this->text);
     }
 }
