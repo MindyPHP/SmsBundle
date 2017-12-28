@@ -1,9 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: max
- * Date: 29/11/16
- * Time: 15:29
+
+declare(strict_types=1);
+
+/*
+ * This file is part of Mindy Framework.
+ * (c) 2017 Maxim Falaleev
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Mindy\Bundle\SmsBundle\Dashboard;
@@ -29,7 +33,7 @@ class SmsWidget extends AbstractWidget
     {
         return [
             'balance' => $this->sms->myBalance(),
-            'limit' => $this->sms->myLimit()
+            'limit' => $this->sms->myLimit(),
         ];
     }
 }

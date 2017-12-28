@@ -1,3 +1,7 @@
+parameters:
+    sms_api_token: ''
+    sms_partner_id: '153212'
+
 services:
     sms_api_token:
         class: Zelenin\SmsRu\Auth\ApiIdAuth
@@ -6,13 +10,15 @@ services:
 
     sms:
         class: Zelenin\SmsRu\Api
-        arguments: [ '@sms_api_token' ]
+        arguments:
+            - '@sms_api_token'
 
     sms_spool:
         class: Mindy\Bundle\SmsBundle\Pool\SmsSpool
 
     dashboard.widget.sms:
         class: Mindy\Bundle\SmsBundle\Dashboard\SmsWidget
-        arguments: [ '@sms' ]
+        arguments:
+            - '@sms'
         tags:
             - { name: admin.dashboard.widget }

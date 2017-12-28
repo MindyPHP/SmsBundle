@@ -1,9 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: max
- * Date: 29/11/2016
- * Time: 20:55
+
+declare(strict_types=1);
+
+/*
+ * This file is part of Mindy Framework.
+ * (c) 2017 Maxim Falaleev
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Mindy\Bundle\SmsBundle\Command;
@@ -12,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Zelenin\SmsRu\Entity\Sms;
 
 class SmsCommand extends ContainerAwareCommand
 {
@@ -36,14 +41,14 @@ class SmsCommand extends ContainerAwareCommand
         foreach ($spool->getMessages() as $sms) {
             $logMessage = sprintf("Send '%s' to '%s'", $sms->text, $sms->to);
 
-            /** @var \Mindy\Bundle\SmsBundle\Model\Sms $sms */
-            if (false == $debug) {
-                $sms->smsSend($smsApi);
-                $logger->info($logMessage);
-            } else {
-                $output->writeln($logMessage);
-            }
+            /* @var \Mindy\Bundle\SmsBundle\Model\Sms $sms */
+            $message = new Sms($this->to, $this->text);
+            $message->test = $debug;
+            $message->translit = false;
+            $message->partner_id = $container->getParameter('sms_partner_id');
+            $smsApi->smsSend($message);
+
+            $logger->info($logMessage);
         }
     }
-
 }

@@ -1,9 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: max
- * Date: 29/11/2016
- * Time: 20:49
+
+declare(strict_types=1);
+
+/*
+ * This file is part of Mindy Framework.
+ * (c) 2017 Maxim Falaleev
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Mindy\Bundle\SmsBundle\Model;
@@ -12,8 +16,6 @@ use Mindy\Orm\Fields\CharField;
 use Mindy\Orm\Fields\DateTimeField;
 use Mindy\Orm\Fields\TextField;
 use Mindy\Orm\Model;
-use Zelenin\SmsRu\Api;
-use Zelenin\SmsRu\Entity\Sms as SmsMessage;
 
 class Sms extends Model
 {
@@ -22,21 +24,16 @@ class Sms extends Model
         return [
             'to' => [
                 'class' => CharField::class,
-                'length' => 11
+                'length' => 11,
             ],
             'text' => [
-                'class' => TextField::class
+                'class' => TextField::class,
             ],
             'created_at' => [
                 'class' => DateTimeField::class,
                 'autoNowAdd' => true,
-                'editable' => false
-            ]
+                'editable' => false,
+            ],
         ];
-    }
-
-    public function smsSend(Api $api)
-    {
-        return $api->smsSend(new SmsMessage($this->to, $this->text));
     }
 }

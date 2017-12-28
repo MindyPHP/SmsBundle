@@ -1,9 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: max
- * Date: 29/11/2016
- * Time: 20:50
+
+declare(strict_types=1);
+
+/*
+ * This file is part of Mindy Framework.
+ * (c) 2017 Maxim Falaleev
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Mindy\Bundle\SmsBundle\Pool;
@@ -25,7 +29,6 @@ class SmsSpool
 
     public function create($to, $text)
     {
-        $sms = new Sms(['to' => $to, 'text' => $text]);
-        $sms->save();
+        (new Sms(['to' => $to, 'text' => $text]))->save();
     }
 }
